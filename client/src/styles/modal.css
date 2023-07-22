@@ -1,0 +1,12 @@
+.modal-header {
+  text-transform: capitalize;
+  padding: 10px 16px !important;
+}
+.modal-footer {
+  padding: 10px 16px !important;
+}
+.markdown-body {
+  padding: 20px;
+  max-height: 75vh;
+  overflow: auto;
+}
