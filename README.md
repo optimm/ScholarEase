@@ -1,4 +1,4 @@
-# Devhub
+# ScholarEase
 - #### Deployed at https://devhubb.netlify.app/
 - Is is a social application for developers to showcase their projects  and to interact with other developers.
 - Built with Reactjs, Nodejs, ExpressJs, Redux, JWT, MongoDB, Cloudinary, Github API.
