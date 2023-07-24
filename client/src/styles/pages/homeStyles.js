@@ -39,8 +39,7 @@ export const LandingOverlay = styled.div`
   }
   .button-main {
     margin: 0% auto;
-    height: 75px;
-    width: 230px;
+    padding: 20px;
     border-radius: 5px;
     font-size: clamp(16px, 1.5vw, 1.5vw);
     background: var(--glass-morph);

@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <NavContainerMain>
       <Logo>
-        <Link to="/"></Link>
+        <Link to="/">ScholarEase</Link>
       </Logo>
       {isAuthenticated && (
         <Item>
@@ -25,12 +25,10 @@ const Navbar = () => {
       <Item>
         <Link to="/projects">All Scholarships</Link>
       </Item>
+
       <Item>
-        <Link to="/users">Developers</Link>
-      </Item>
-      {/* <Item>
         <Link to="/about">About</Link>
-      </Item> */}
+      </Item>
       <NavContainerRight>
         {isAuthenticated ? (
           <Link to={`/users/${myData._id}`}>

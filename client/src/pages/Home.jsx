@@ -10,7 +10,7 @@ const Home = () => {
         <LandingOverlay>
           <div className="section-main">
             <div className="text-main">
-              Welcome To <span className="text-main-span">Scholarships</span>
+              Welcome To <span className="text-main-span">ScholarEase</span>
             </div>
             <div className="text-sub">
             Find scholarships effortlessly. Excellent recommendations. 
