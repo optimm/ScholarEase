@@ -28,7 +28,7 @@ const connectDb = require("./db/connect");
 
 //importing routers
 const authRouter = require("./routes/auth");
-const projectRouter = require("./routes/project");
+const projectRouter = require("./routes/scholarship");
 const userRouter = require("./routes/user");
 
 // error handler middlewares
@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
-app.use("/api/v1/project", projectRouter);
+app.use("/api/v1/scholarship", projectRouter);
 
 // error handler
 app.use(notFoundMiddleware);

@@ -15,9 +15,9 @@ const searchUser = async (req, res, searchQuery) => {
     };
     queryObject = { ...queryObject, ...userQuery };
   }
-  const mongoQuery = User.find(queryObject)
-    .sort("-total_followers")
-    .select("name username email avatar");
+  const mongoQuery = User.find(queryObject).select(
+    "name username email avatar"
+  );
   const data = await paginate(req, res, mongoQuery);
   const total = await User.countDocuments(queryObject);
   return { data, total };

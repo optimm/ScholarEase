@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { emailReg } = require("../utils/validation");
-const Project = require("./Project");
+const Scholarship = require("./Scholarship");
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -39,54 +39,19 @@ const UserSchema = new mongoose.Schema({
     max: [200, "Bio cannot be more than 200 characters"],
     default: "",
   },
-  profiles: {
-    type: [
-      {
-        link: {
-          type: String,
-          required: [true, "Please provide a link"],
-        },
-        platform: {
-          type: String,
-          required: [true, "Please provide the platform name"],
-        },
-      },
-    ],
-    default: [],
-  },
-  projects: [
+  scholarships: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Project",
+      ref: "Scholarship",
     },
   ],
-  saved_projects: [
+  saved_scholarships: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Project",
+      ref: "Scholarship",
     },
   ],
-  followers: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-  following: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-  total_followers: {
-    type: Number,
-    default: 0,
-  },
-  total_following: {
-    type: Number,
-    default: 0,
-  },
-  total_projects: {
+  total_scholarships: {
     type: Number,
     default: 0,
   },

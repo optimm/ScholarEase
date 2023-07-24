@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("./User");
 
-const ProjectSchema = new mongoose.Schema({
+const ScholarshipSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, "Please provide a title"],
@@ -13,32 +13,20 @@ const ProjectSchema = new mongoose.Schema({
   },
   desc: {
     type: String,
+    required: [true, "Please provide a description"],
     max: [500, "Descripition cannot be more than 500 characters"],
   },
   tags: [{ type: String }],
-  github_link: {
+
+  link: {
     type: String,
-    required: [
-      function () {
-        return this.live_link === null;
-      },
-      "Code base or live link should be provided",
-    ],
   },
-  live_link: {
-    type: String,
-    required: [
-      function () {
-        return this.github_link === null;
-      },
-      "Code base or live link should be provided",
-    ],
-  },
+
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  likes: [
+  upvotes: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -68,7 +56,7 @@ const ProjectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  total_likes: {
+  total_upvotes: {
     type: Number,
     default: 0,
   },
@@ -82,4 +70,4 @@ const ProjectSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Project", ProjectSchema);
+module.exports = mongoose.model("Scholarship", ScholarshipSchema);

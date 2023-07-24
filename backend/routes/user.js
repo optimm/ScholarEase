@@ -7,18 +7,14 @@ const { ifAuthenticated } = require("../middleware/if-autheticated");
 const {
   getAllUsers,
   getSingleUser,
-  getFollowers,
-  getFollowing,
-  followUser,
   updateProfile,
   deleteProfile,
   checkMyAuth,
 } = require("../controllers/user");
 const {
-  getProjectsOfUser,
-  getSavedProjects,
-  getFeed,
-} = require("../controllers/project");
+  getScholarshipUser,
+  getSavedScholarships,
+} = require("../controllers/scholarship");
 
 router.route("/").get(ifAuthenticated, getAllUsers);
 router
@@ -26,13 +22,10 @@ router
   .get(authMiddleware, checkMyAuth)
   .patch(authMiddleware, updateProfile)
   .delete(authMiddleware, deleteProfile);
-router.route("/me/feed").get(authMiddleware, getFeed);
-router.route("/me/saved").get(authMiddleware, getSavedProjects);
+
+router.route("/me/saved").get(authMiddleware, getSavedScholarships);
 router.route("/:id").get(ifAuthenticated, getSingleUser);
-router.route("/:id/followers").get(getFollowers);
-router.route("/:id/following").get(getFollowing);
-router.route("/:id/follow").get(authMiddleware, followUser);
-router.route("/:id/projects").get(getProjectsOfUser);
+router.route("/:id/scholarships").get(getScholarshipUser);
 
 // route for user projects
 
