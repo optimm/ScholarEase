@@ -15,9 +15,21 @@ export const userApi = baseApi.injectEndpoints({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(authenticateMe({ isAuthenticated: true, data: data?.data }));
+          dispatch(
+            authenticateMe({
+              isAuthenticated: true,
+              isAdmin: data?.data?.isadmin,
+              data: data?.data,
+            })
+          );
         } catch (error) {
-          dispatch(authenticateMe({ isAuthenticated: false, myData: {} }));
+          dispatch(
+            authenticateMe({
+              isAuthenticated: false,
+              isAdmin: false,
+              myData: {},
+            })
+          );
         }
       },
     }),

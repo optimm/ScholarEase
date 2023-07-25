@@ -90,6 +90,7 @@ const Profile = () => {
         dispatch(
           authenticateMe({
             isAuthenticated: true,
+            isAdmin: tdata?.isadmin,
             data: {
               _id: tdata?._id,
               avatar: tdata?.avatar,

@@ -24,7 +24,13 @@ export const authApi = baseApi.injectEndpoints({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled;
         const { data: user } = data;
-        dispatch(authenticateMe({ isAuthenticated: true, data: user }));
+        dispatch(
+          authenticateMe({
+            isAuthenticated: true,
+            isAdmin: user.isadmin,
+            data: user,
+          })
+        );
       },
       invalidatesTags: ["SingleUser", "AllUsers", "SingleProject"],
     }),
