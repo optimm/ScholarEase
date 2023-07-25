@@ -76,16 +76,7 @@ const updateProfile = async (req, res) => {
     }
     me.username = username;
   }
-  if (
-    !email ||
-    email === "" ||
-    !name ||
-    name === "" ||
-    !username ||
-    username === ""
-  ) {
-    throw new BadRequestError("Please provide name,username,email");
-  }
+
   me.name = name;
   me.bio = bio;
   me.about = about;
@@ -121,7 +112,7 @@ const deleteProfile = async (req, res) => {
   await Scholarship.updateMany({ saved: userId }, { $pull: { saved: userId } });
 
   //removing comment of this user from posts
-  await Project.updateMany(
+  await Scholarship.updateMany(
     { "comments.user": userId },
     { $pull: { comments: { user: userId } } }
   );

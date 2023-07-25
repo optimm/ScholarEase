@@ -74,10 +74,18 @@ UserSchema.methods.CheckPassword = async function (userPassword) {
 };
 
 // generating the jwt token
-UserSchema.methods.CreateJWT = function ({ expires, id = null }) {
-  return jwt.sign({ userId: this._id, hash: id }, process.env.JWT_SECRET, {
-    expiresIn: expires,
-  });
+UserSchema.methods.CreateJWT = function ({
+  expires,
+  id = null,
+  admin = false,
+}) {
+  return jwt.sign(
+    { userId: this._id, hash: id, admin },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: expires,
+    }
+  );
 };
 
 module.exports = mongoose.model("User", UserSchema);

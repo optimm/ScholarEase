@@ -48,7 +48,6 @@ const getSingleScholarship = async (req, res) => {
     isMine,
     isUpvoted,
     isSaved,
-    readme,
   });
 };
 

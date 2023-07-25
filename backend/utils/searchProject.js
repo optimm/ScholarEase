@@ -1,4 +1,4 @@
-const Project = require("../models/Scholarship");
+const Scholarship = require("../models/Scholarship");
 const User = require("../models/User");
 const paginate = require("./paginate");
 
@@ -7,7 +7,7 @@ const searchProject = async (req, res, searchQuery) => {
   let mongoQuery;
   let total;
   if (q) {
-    mongoQuery = Project.aggregate([
+    mongoQuery = Scholarship.aggregate([
       {
         $lookup: {
           from: "users",
@@ -27,7 +27,7 @@ const searchProject = async (req, res, searchQuery) => {
         },
       },
       {
-        $scholarship: {
+        $project: {
           title: 1,
           desc: 1,
           image: 1,
@@ -61,7 +61,7 @@ const searchProject = async (req, res, searchQuery) => {
       },
     ]).sort("-total_upvotes");
 
-    const z = await Project.aggregate([
+    const z = await Scholarship.aggregate([
       {
         $lookup: {
           from: "users",
@@ -89,11 +89,11 @@ const searchProject = async (req, res, searchQuery) => {
     ]);
     total = z[0]?.count || 0;
   } else {
-    mongoQuery = Project.find(searchQuery)
+    mongoQuery = Scholarship.find(searchQuery)
       .sort("-total_upvotes")
       .select("-upvotes -comments -saved")
       .populate("owner", "name email avatar username");
-    total = await Project.countDocuments(searchQuery);
+    total = await Scholarship.countDocuments(searchQuery);
   }
   const data = await paginate(req, res, mongoQuery);
   return { data, total };
