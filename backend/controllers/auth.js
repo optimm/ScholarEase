@@ -85,7 +85,6 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  const { userId } = req.user;
   res
     .status(StatusCodes.OK)
     .cookie("token", null, {

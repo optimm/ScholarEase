@@ -16,7 +16,7 @@ const authMiddleware = async (req, res, next) => {
   if (!user) {
     throw new UnauthenticatedError("Invalid token");
   }
-  req.user = { userId };
+  req.user = { userId, isadmin: user.isadmin };
   next();
 };
 

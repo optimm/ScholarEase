@@ -5,6 +5,10 @@ const { emailReg } = require("../utils/validation");
 const Scholarship = require("./Scholarship");
 
 const UserSchema = new mongoose.Schema({
+  isadmin: {
+    type: Boolean,
+    default: false,
+  },
   name: {
     type: String,
     required: [true, "Please provide a name"],
@@ -74,13 +78,9 @@ UserSchema.methods.CheckPassword = async function (userPassword) {
 };
 
 // generating the jwt token
-UserSchema.methods.CreateJWT = function ({
-  expires,
-  id = null,
-  admin = false,
-}) {
+UserSchema.methods.CreateJWT = function ({ expires, id = null }) {
   return jwt.sign(
-    { userId: this._id, hash: id, admin },
+    { userId: this._id, isAdmin: this._isadmin, hash: id },
     process.env.JWT_SECRET,
     {
       expiresIn: expires,

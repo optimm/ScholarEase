@@ -15,8 +15,9 @@ const {
   getScholarshipUser,
   getSavedScholarships,
 } = require("../controllers/scholarship");
+const adminOnlyCheckMiddleware = require("../middleware/admin-only");
 
-router.route("/").get(ifAuthenticated, getAllUsers);
+router.route("/").get(authMiddleware, adminOnlyCheckMiddleware, getAllUsers);
 router
   .route("/me")
   .get(authMiddleware, checkMyAuth)
