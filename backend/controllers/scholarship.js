@@ -62,7 +62,7 @@ const getScholarshipUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ success: true, data });
 };
 
-// can be done by only owner********/
+// can be done by only owner or admin********/
 const createScholarship = async (req, res) => {
   const { userId } = req.user;
   const me = await User.findById(userId);
@@ -101,13 +101,13 @@ const createScholarship = async (req, res) => {
 
 const updateScholarship = async (req, res) => {
   const { id } = req.params;
-  const { userId } = req.user;
+  const { userId, isadmin } = req.user;
   let scholarship = await Scholarship.findById(id);
   if (!scholarship) {
     throw new NotFoundError("Scholarship not found");
   }
-  if (userId.toString() !== scholarship.owner.toString()) {
-    throw new UnauthenticatedError("Scholarship is not owned by current user");
+  if (userId.toString() !== scholarship.owner.toString() && !isadmin) {
+    throw new UnauthenticatedError("Not authorized to update");
   }
   const { title, link, tags, desc, image } = req.body;
   if (!title) {
@@ -148,15 +148,16 @@ const updateScholarship = async (req, res) => {
 
 const deleteScholarship = async (req, res) => {
   const { id } = req.params;
-  const { userId } = req.user;
+  const { userId, isadmin } = req.user;
   const scholarship = await Scholarship.findById(id);
+  const ownerId = scholarship.owner;
   if (!scholarship) {
     throw new NotFoundError("Scholarship not found");
   }
-  if (userId.toString() !== scholarship.owner.toString()) {
-    throw new UnauthenticatedError("Scholarship is not owned by current user");
+  if (userId.toString() !== scholarship.owner.toString() && !isadmin) {
+    throw new UnauthenticatedError("Not authorized to delete scholarship");
   }
-  const me = await User.findById(userId);
+  const me = await User.findById(ownerId);
   me.total_scholarships -= 1;
   const index = me.scholarships.indexOf(id);
   me.scholarships.splice(index, 1);
@@ -254,7 +255,8 @@ const commentOnScholarship = async (req, res) => {
 };
 
 const deleteComment = async (req, res) => {
-  const { userId } = req.user;
+  const { userId, isadmin } = req.user;
+
   const { id: pId } = req.params;
   const { commentId } = req.body;
   const scholarship = await Scholarship.findById(pId);
@@ -274,7 +276,8 @@ const deleteComment = async (req, res) => {
   if (
     !(
       comment.user.toString() === userId.toString() ||
-      scholarship.owner.toString() === userId.toString()
+      scholarship.owner.toString() === userId.toString() ||
+      isadmin
     )
   ) {
     throw new UnauthenticatedError("Not authorized to delete comment");

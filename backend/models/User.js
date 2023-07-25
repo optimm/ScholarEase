@@ -80,7 +80,7 @@ UserSchema.methods.CheckPassword = async function (userPassword) {
 // generating the jwt token
 UserSchema.methods.CreateJWT = function ({ expires, id = null }) {
   return jwt.sign(
-    { userId: this._id, isAdmin: this._isadmin, hash: id },
+    { userId: this._id, isAdmin: this.isadmin, hash: id },
     process.env.JWT_SECRET,
     {
       expiresIn: expires,
