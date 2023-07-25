@@ -37,7 +37,6 @@ const getSingleUser = async (req, res) => {
         throw new BadRequestError("User does not exist");
       }
       data = { ...user._doc };
-      delete data.followers;
     }
   } else {
     user = await User.findById(id).select("-scholarships -saved_scholarships");
@@ -112,7 +111,7 @@ const deleteProfile = async (req, res) => {
   // Delete all scholarships posted by the user
   await Scholarship.deleteMany({ owner: userId });
 
-  //removing likes of this user from posts
+  //removing likes of this user
   await Scholarship.updateMany(
     { upvotes: userId },
     { $pull: { upvotes: userId } }

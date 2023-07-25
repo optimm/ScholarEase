@@ -18,7 +18,7 @@ const getAllScholarship = async (req, res) => {
 
 const getSingleScholarship = async (req, res) => {
   const { id } = req.params;
-  let isLiked = false;
+  let isUpvoted = false;
   let isMine = false;
   let isSaved = false;
 
@@ -36,15 +36,20 @@ const getSingleScholarship = async (req, res) => {
     if (userId === scholarship?.owner?._id.toString()) isMine = true;
 
     if (scholarship?.upvotes?.some((e) => e._id.toString() === userId))
-      isLiked = true;
+      isUpvoted = true;
 
     if (scholarship?.saved?.some((e) => e._id.toString() === userId))
       isSaved = true;
   }
 
-  res
-    .status(StatusCodes.OK)
-    .json({ success: true, data: scholarship, isMine, isLiked, isSaved, readme });
+  res.status(StatusCodes.OK).json({
+    success: true,
+    data: scholarship,
+    isMine,
+    isUpvoted,
+    isSaved,
+    readme,
+  });
 };
 
 const getScholarshipUser = async (req, res) => {
@@ -83,7 +88,10 @@ const createScholarship = async (req, res) => {
     };
   }
 
-  const scholarship = await Scholarship.create({ ...projectData, owner: userId });
+  const scholarship = await Scholarship.create({
+    ...projectData,
+    owner: userId,
+  });
   me.scholarships.unshift(scholarship._id);
   me.total_scholarships += 1;
   await me.save();
@@ -123,9 +131,12 @@ const updateScholarship = async (req, res) => {
   }
   if (image) {
     const myCloud = await cloudinary.uploader.upload(image, {
-      folder: "projects",
+      folder: "scholarships",
     });
-    scholarship.image = { public_id: myCloud?.public_id, url: myCloud?.secure_url };
+    scholarship.image = {
+      public_id: myCloud?.public_id,
+      url: myCloud?.secure_url,
+    };
   }
 
   await Scholarship.deleteOne({ _id: id });

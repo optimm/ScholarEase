@@ -27,6 +27,4 @@ router.route("/me/saved").get(authMiddleware, getSavedScholarships);
 router.route("/:id").get(ifAuthenticated, getSingleUser);
 router.route("/:id/scholarships").get(getScholarshipUser);
 
-// route for user projects
-
 module.exports = router;
