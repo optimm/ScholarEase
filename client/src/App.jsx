@@ -135,7 +135,7 @@ const App = () => {
               />
 
               <Route
-                path="/projects"
+                path="/scholarships"
                 element={
                   <>
                     <Navbar />
@@ -145,7 +145,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/projects/:id"
+                path="/scholarships/:id"
                 element={
                   <>
                     <Navbar />
@@ -155,7 +155,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/projects/:id/edit"
+                path="/scholarships/:id/edit"
                 element={
                   <>
                     <Navbar />
@@ -166,7 +166,7 @@ const App = () => {
               />
 
               <Route
-                path="/projects/add"
+                path="/scholarships/add"
                 element={
                   errState || isAuthenticated ? (
                     <>

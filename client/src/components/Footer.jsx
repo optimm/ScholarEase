@@ -20,7 +20,9 @@ const Footer = () => {
           <ProfileIcon platform={"instagram"} />
         </a>
       </div>
-      <div className="text-section">© 2023 Devhub. Created by Ayush Saxena</div>
+      <div className="text-section">
+        © 2023 ScholarEase. Created by Ayush Saxena
+      </div>
     </FooterWrapper>
   );
 };

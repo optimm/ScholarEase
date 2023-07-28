@@ -17,13 +17,8 @@ const Navbar = () => {
       <Logo>
         <Link to="/">ScholarEase</Link>
       </Logo>
-      {isAuthenticated && (
-        <Item>
-          <Link to="/feed">Feed</Link>
-        </Item>
-      )}
       <Item>
-        <Link to="/projects">All Scholarships</Link>
+        <Link to="/scholarships">All Scholarships</Link>
       </Item>
 
       <Item>

@@ -18,8 +18,7 @@ import { useFormik } from "formik";
 import editProfileSchema from "../validationSchemas/editProfile";
 import { createNotification } from "./Notification";
 import { baseApi } from "../app/services/baseApi";
-import { capitalizeString, trimAll } from "../util/utilFunctions";
-import { platformOptions } from "../util/options";
+import { trimAll } from "../util/utilFunctions";
 import { ButtonLoader } from "./Loaders";
 
 const EditProfileModal = ({ show, setShow, blankLoader, setBlankLoader }) => {
@@ -87,19 +86,9 @@ const EditProfileModal = ({ show, setShow, blankLoader, setBlankLoader }) => {
       temp?.email && setFieldValue("email", temp?.email);
       temp?.bio && setFieldValue("bio", temp?.bio);
       temp?.about && setFieldValue("about", temp?.about);
-      temp?.profiles && setFieldValue("profiles", temp?.profiles);
       temp?.avatar?.url && setImage(temp?.avatar?.url);
     }
   }, [data, setFieldValue]);
-
-  const linkToProfile = (plt) => {
-    let str = "";
-    values?.profiles?.map((e) => {
-      if (e?.platform === plt) str = e?.link;
-      return 0;
-    });
-    return str;
-  };
 
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -234,62 +223,6 @@ const EditProfileModal = ({ show, setShow, blankLoader, setBlankLoader }) => {
                         touched.about && errors.about ? errors.about : null
                       }
                     />
-                  </div>
-                  <div className="profiles-section">
-                    <div className="profile-head">Links</div>
-                    <div className="profiles">
-                      {platformOptions.map((item, index) => (
-                        <TextField
-                          key={index}
-                          name={item}
-                          label={capitalizeString(item)}
-                          variant="outlined"
-                          color="secondary"
-                          className="form-input"
-                          fullWidth
-                          value={linkToProfile(item)}
-                          onBlur={handleBlur}
-                          onChange={(e) => {
-                            let temp = [...values?.profiles];
-                            let flag = false;
-
-                            if (
-                              !e.target.value ||
-                              e.target.value.trim() === ""
-                            ) {
-                              let ind = -1;
-                              temp.map((x, i) => {
-                                if (x?.platform === item) {
-                                  ind = i;
-                                }
-                                return 0;
-                              });
-                              if (ind > -1) {
-                                temp.splice(ind, 1);
-                              }
-                              setFieldValue("profiles", temp);
-                              return;
-                            }
-                            temp.map((x, i) => {
-                              if (x?.platform === item) {
-                                flag = true;
-                                let newObj = { ...temp[i] };
-                                newObj.link = e.target.value.trim();
-                                temp[i] = newObj;
-                              }
-                              return 0;
-                            });
-                            if (!flag) {
-                              temp = [
-                                ...temp,
-                                { platform: item, link: e.target.value.trim() },
-                              ];
-                            }
-                            setFieldValue("profiles", temp);
-                          }}
-                        />
-                      ))}
-                    </div>
                   </div>
                 </EditInner>
               </>

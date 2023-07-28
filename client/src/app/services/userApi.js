@@ -100,7 +100,7 @@ export const userApi = baseApi.injectEndpoints({
     getProjectOfUser: builder.query({
       query: ({ id }) => {
         return {
-          url: `user/${id}/projects`,
+          url: `user/${id}/scholarships`,
           method: "GET",
         };
       },

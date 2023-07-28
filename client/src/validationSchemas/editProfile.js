@@ -30,12 +30,6 @@ let editProfileSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   bio: yup.string().max(200, "Bio cannot be more than 200 characters"),
   about: yup.string().max(1000, "About cannot be more than 1000 characters"),
-  profiles: yup.array(
-    yup.object({
-      platform: yup.string().required("Platform is required"),
-      link: yup.string().required("Link is required"),
-    })
-  ),
 });
 
 export default editProfileSchema;

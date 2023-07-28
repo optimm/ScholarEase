@@ -32,7 +32,7 @@ const DeleteAccountProject = ({ show, setShow, project }) => {
     if (finalData?.success) {
       createNotification(finalData?.msg || "Done", "info", 2000);
       setShow(false);
-      navigate(project ? "/projects" : "/");
+      navigate(project ? "/scholarships" : "/");
     } else {
       createNotification(
         finalError?.data?.msg || "Something went wrong",

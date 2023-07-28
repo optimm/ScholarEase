@@ -19,7 +19,7 @@ const AllTagsModal = ({ show, setShow, tags = [] }) => {
             {tags?.map((item, index) => (
               <TagSingle
                 key={index}
-                onClick={() => navigate(`/projects?q=${item}`)}
+                onClick={() => navigate(`/scholarships?q=${item}`)}
               >
                 {item}
               </TagSingle>

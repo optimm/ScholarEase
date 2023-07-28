@@ -18,7 +18,7 @@ const ProjectCard = ({ project }) => {
     >
       <div
         className="image-section"
-        onClick={() => navigate(`/projects/${project?._id}`)}
+        onClick={() => navigate(`/scholarships/${project?._id}`)}
       >
         <img
           src={project?.image?.url}
@@ -45,7 +45,7 @@ const ProjectCard = ({ project }) => {
           </div>
           <div className="likes-right">
             <div className="like-indv">
-              {project?.total_likes} <AiFillLike />
+              {project?.total_upvotes} <AiFillLike />
             </div>
 
             <div className="like-indv">

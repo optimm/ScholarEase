@@ -13,13 +13,13 @@ const Home = () => {
               Welcome To <span className="text-main-span">ScholarEase</span>
             </div>
             <div className="text-sub">
-            Find scholarships effortlessly. Excellent recommendations. 
-             Empowering students. Join us on your journey!
+              Find scholarships effortlessly. Excellent recommendations.
+              Empowering students. Join us on your journey!
             </div>
             <div className="button-container">
               <button
                 className="button-main"
-                onClick={() => navigate("/projects")}
+                onClick={() => navigate("/scholarships")}
               >
                 Discover Scholarships
               </button>

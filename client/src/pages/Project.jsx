@@ -283,8 +283,8 @@ const Project = () => {
 
               <div className="likes-section">
                 <div className="likes-data" onClick={() => setLikesShow(true)}>
-                  Liked by {projectData?.total_likes}{" "}
-                  {projectData?.total_likes === 1 ? "User" : "Users"}
+                  Liked by {projectData?.total_upvotes}{" "}
+                  {projectData?.total_upvotes === 1 ? "User" : "Users"}
                 </div>
                 {isAuthenticated && data?.isMine && (
                   <div

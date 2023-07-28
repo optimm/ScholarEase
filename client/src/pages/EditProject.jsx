@@ -80,7 +80,7 @@ const EditProject = () => {
       try {
         const updateData = await update({ body: temp, id }).unwrap();
         createNotification(updateData?.msg, "success", 2000);
-        navigate(`/projects/${id}`);
+        navigate(`/scholarships/${id}`);
       } catch (error) {
         setErr(true);
         createNotification(error?.data?.msg, "error", 2000);

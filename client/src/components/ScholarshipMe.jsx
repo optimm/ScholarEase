@@ -7,7 +7,7 @@ import { ExtraButton } from "../styles/pages/profileStyles";
 import { PostOfDevLoader } from "./Loaders";
 import ProjectCard from "./ProjectCard";
 
-const PostsOfDev = ({ isMe }) => {
+const ScholarshipMe = ({ isMe }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, error } = useGetProjectOfUserQuery({ id });
@@ -29,8 +29,8 @@ const PostsOfDev = ({ isMe }) => {
   return (
     <PostWrapper>
       {isMe && (
-        <ExtraButton primary onClick={() => navigate("/projects/add")}>
-          Add Project
+        <ExtraButton primary onClick={() => navigate("/scholarships/add")}>
+          Add Scholarship
         </ExtraButton>
       )}
       {isLoading || blankLoader ? (
@@ -50,4 +50,4 @@ const PostsOfDev = ({ isMe }) => {
   );
 };
 
-export default PostsOfDev;
+export default ScholarshipMe;
