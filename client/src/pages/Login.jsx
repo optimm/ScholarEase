@@ -39,7 +39,7 @@ const Login = () => {
         setShowPassword(false);
         const data = await login({ body: values }).unwrap();
         resetForm();
-        createNotification(`Welcome ${data?.data?.name}`, "success", 2000);
+        createNotification(`Welcome ${data?.data?.isadmin && "Admin"},${data?.data?.name}`, "success", 2000);
         const { _id: id } = data?.data;
         navigate(`/users/${id}`);
       } catch (error) {}

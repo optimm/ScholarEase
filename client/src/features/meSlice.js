@@ -4,6 +4,7 @@ const meSlice = createSlice({
   name: "me",
   initialState: {
     isAuthenticated: false,
+    isAdmin: false,
     myData: {},
   },
   reducers: {

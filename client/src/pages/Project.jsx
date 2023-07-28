@@ -30,7 +30,7 @@ import { RotatingLines } from "react-loader-spinner";
 const Project = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { isAuthenticated } = useSelector((state) => state.me);
+  const { isAuthenticated, isAdmin } = useSelector((state) => state.me);
   const { data, isLoading, isFetching, error } = useGetSingleProjectQuery({
     id,
   });
@@ -101,7 +101,7 @@ const Project = () => {
       if (likeData?.success) {
         createNotification(likeData?.msg, "success", 2000);
       } else if (!likeError?.data?.success) {
-        createNotification(likeError?.data?.LikesIndvmsg, "error", 2000);
+        createNotification(likeError?.data?.msg, "error", 2000);
       }
     }
   };
@@ -113,8 +113,8 @@ const Project = () => {
       const { data: saveData, error: saveError } = await saveUnsave({ id });
       if (saveData?.success) {
         createNotification(saveData?.msg, "success", 2000);
-      } else if (!saveError?.success) {
-        createNotification(saveError?.msg, "error", 2000);
+      } else if (!saveError?.data?.success) {
+        createNotification(saveError?.data?.msg, "error", 2000);
       }
     }
   };
@@ -244,7 +244,7 @@ const Project = () => {
                     </LikesIndv>
                   )}
                 </div>
-                {isAuthenticated && data?.isMine && (
+                {isAuthenticated && (data?.isMine || isAdmin) && (
                   <div className="likes-section">
                     <button
                       className="edit-button"

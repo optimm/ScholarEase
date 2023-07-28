@@ -175,6 +175,7 @@ const Profile = () => {
                     </>
                   )}
                 </div>
+                {data?.data?.isadmin && <div className="complete-profile">Admin</div>}
               </div>
             </TopWrapper>
             <ButtonWrapper>

@@ -184,6 +184,7 @@ const upvoteScholarship = async (req, res) => {
   const { userId } = req.user;
   const { id } = req.params;
   const scholarship = await Scholarship.findById(id);
+
   if (!scholarship) {
     throw new NotFoundError("Scholarship not found");
   }
@@ -211,6 +212,7 @@ const saveScholarship = async (req, res) => {
   const { id } = req.params;
   const me = await User.findById(userId);
   const scholarship = await Scholarship.findById(id);
+
   if (!scholarship) {
     throw new NotFoundError("Scholarship not found");
   }

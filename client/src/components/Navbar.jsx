@@ -11,7 +11,7 @@ import {
 } from "../styles/components/navbarStyles";
 
 const Navbar = () => {
-  const { isAuthenticated, myData } = useSelector((state) => state.me);
+  const { isAuthenticated, myData, isAdmin } = useSelector((state) => state.me);
   return (
     <NavContainerMain>
       <Logo>
@@ -20,6 +20,12 @@ const Navbar = () => {
       <Item>
         <Link to="/scholarships">All Scholarships</Link>
       </Item>
+
+      {isAdmin && (
+        <Item>
+          <Link to="/users">All Users</Link>
+        </Item>
+      )}
 
       <Item>
         <Link to="/about">About</Link>

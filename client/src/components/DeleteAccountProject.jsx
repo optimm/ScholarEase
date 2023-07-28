@@ -46,7 +46,7 @@ const DeleteAccountProject = ({ show, setShow, project }) => {
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
         <Modal.Title>
-          {project ? "Delete Project" : "Delete Account"}
+          {project ? "Delete Scholarship" : "Delete Account"}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -67,14 +67,14 @@ const DeleteAccountProject = ({ show, setShow, project }) => {
             `}
           >
             Are you sure you want to delete
-            {project ? " this project" : " your account"}? It cannot be
+            {project ? " this scholarship" : " your account"}? It cannot be
             recovered afterwards.
           </div>
           <Button variant="danger" onClick={handleDelete}>
             {isAccDelLoading || isProDelLoading ? (
               <ButtonLoader />
             ) : project ? (
-              "Delete Project"
+              "Delete Scholarship"
             ) : (
               "Delete Account"
             )}
