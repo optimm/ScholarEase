@@ -26,7 +26,7 @@ const EditProject = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [err, setErr] = useState(false);
-  const [update] = useEditProjectMutation();
+  const [update, { isLoading: isUpdateLoading }] = useEditProjectMutation();
   const { data, isLoading, isFetching } = useGetSingleProjectQuery(
     { id },
     { skip: err }
@@ -47,8 +47,7 @@ const EditProject = () => {
     initialValues: {
       title: "",
       desc: "",
-      live_link: "",
-      github_link: "",
+      link: "",
       tags: [],
     },
     validationSchema: createProjectSchema,
@@ -56,17 +55,14 @@ const EditProject = () => {
       values = trimAll(values);
       let temp = { ...values };
       let pData = data?.data;
-      if (!pData?.live_link && temp.live_link === "") delete temp["live_link"];
-      if (!pData?.github_link && temp.github_link === "")
-        delete temp["github_link"];
+      if (!pData?.link && temp.link === "") delete temp["link"];
       if (!pData?.tags && temp?.tags?.length === 0) delete temp["tags"];
       if (!pData?.desc && temp?.desc?.length === 0) delete temp["desc"];
 
       if (
         pData?.title === temp?.title &&
         pData?.desc === temp?.desc &&
-        pData?.live_link === temp?.live_link &&
-        pData?.github_link === temp?.github_link &&
+        pData?.link === temp?.link &&
         arraysEqual(pData?.tags, temp?.tags) &&
         pData?.image?.url === image
       ) {
@@ -93,8 +89,7 @@ const EditProject = () => {
       let pData = data?.data;
       setFieldValue("title", pData?.title);
       pData?.desc && setFieldValue("desc", pData?.desc);
-      pData?.live_link && setFieldValue("live_link", pData?.live_link);
-      pData?.github_link && setFieldValue("github_link", pData?.github_link);
+      pData?.link && setFieldValue("link", pData?.link);
       pData?.tags && setFieldValue("tags", pData?.tags);
       setImage(pData?.image?.url);
     }
@@ -137,7 +132,7 @@ const EditProject = () => {
       ) : (
         <>
           <Head>
-            Edit Your Project, <span>{myData?.username}</span>
+            Edit The Scholarship, <span>{myData?.username}</span>
           </Head>
           <MainWrapper>
             <MainLeft>
@@ -178,41 +173,19 @@ const EditProject = () => {
                     readOnly={isLoading}
                   />
                   <TextField
-                    name="github_link"
-                    label="Github Link"
-                    variant="outlined"
-                    color="secondary"
-                    className="form-input"
-                    fullWidth
-                    value={values.github_link}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={
-                      touched.github_link && errors.github_link ? true : false
-                    }
-                    readOnly={isLoading}
-                    helperText={
-                      touched.github_link && errors.github_link
-                        ? errors.github_link
-                        : null
-                    }
-                  />
-                  <TextField
-                    name="live_link"
+                    name="link"
                     label="Live Link"
                     variant="outlined"
                     color="secondary"
                     className="form-input"
                     fullWidth
-                    value={values.live_link}
+                    value={values.link}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={touched.live_link && errors.live_link ? true : false}
+                    error={touched.link && errors.link ? true : false}
                     readOnly={isLoading}
                     helperText={
-                      touched.live_link && errors.live_link
-                        ? errors.live_link
-                        : null
+                      touched.link && errors.link ? errors.link : null
                     }
                   />
                   <Autocomplete
@@ -236,9 +209,11 @@ const EditProject = () => {
                   <button
                     className="submit-button"
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isLoading || isUpdateLoading}
                   >
-                    {isLoading ? "Loading..." : "Update Project"}
+                    {isLoading || isUpdateLoading
+                      ? "Loading..."
+                      : "Update Scholarship"}
                   </button>
                 </div>
               </MainForm>

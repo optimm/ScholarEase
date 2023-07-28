@@ -117,6 +117,8 @@ export const ProjectImageWrapper = styled.div`
     ${(props) =>
       props.loading &&
       "animation: skeleton-loading 1s linear infinite alternate;"}
+      box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 15%),
+    0px 1px 1px 0px rgb(0 0 0 / 10%), 0px 1px 3px 0px rgb(0 0 0 / 10%);
   }
   .project-back {
     border-radius: 5px;

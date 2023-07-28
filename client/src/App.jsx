@@ -9,9 +9,8 @@ import { Notification } from "./components/Notification";
 import About from "./pages/About";
 import AllProjects from "./pages/AllProjects";
 import AllUsers from "./pages/AllUsers";
-import { CreateProject } from "./pages/CreateProject";
+import { CreateScholarship } from "./pages/CreateScholarship";
 import EditProject from "./pages/EditProject";
-import Feed from "./pages/Feed";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -21,7 +20,7 @@ import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
 
 const App = () => {
-  const { isAuthenticated } = useSelector((state) => state.me);
+  const { isAuthenticated, isAdmin } = useSelector((state) => state.me);
   const { data, isLoading, error, isFetching } = useCheckMyAuthQuery();
   const [blankLoader, setBlankLoader] = useState(true);
   const [errState, setErrState] = useState(false);
@@ -73,16 +72,6 @@ const App = () => {
                 }
               />
               <Route
-                path="/feed"
-                element={
-                  <>
-                    <Navbar />
-                    <Feed />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
                 path={"/login"}
                 element={
                   errState || isAuthenticated ? (
@@ -116,11 +105,15 @@ const App = () => {
               <Route
                 path="/users"
                 element={
-                  <>
-                    <Navbar />
-                    <AllUsers />
-                    <Footer />
-                  </>
+                  !isAdmin ? (
+                    <Navigate replace to="/" />
+                  ) : (
+                    <>
+                      <Navbar />
+                      <AllUsers />
+                      <Footer />
+                    </>
+                  )
                 }
               />
               <Route
@@ -171,7 +164,7 @@ const App = () => {
                   errState || isAuthenticated ? (
                     <>
                       <Navbar />
-                      <CreateProject />
+                      <CreateScholarship />
                       <Footer />
                     </>
                   ) : (

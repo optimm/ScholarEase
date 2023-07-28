@@ -20,7 +20,7 @@ export const FullScreenLoader = () => {
     <FullScreenLoaders>
       <img className="image" src="/images/cat.gif" alt="animation"></img>
       <div className="text">
-        <span>Dev</span>hub
+        <span>Scholar</span>Ease
       </div>
     </FullScreenLoaders>
   );

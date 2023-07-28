@@ -18,7 +18,7 @@ import { BsCardImage } from "react-icons/bs";
 import { trimAll } from "../util/utilFunctions";
 import { ButtonLoader } from "../components/Loaders";
 
-export const CreateProject = () => {
+export const CreateScholarship = () => {
   const [create, { isLoading }] = useCreateProjectMutation();
   const { myData } = useSelector((state) => state.me);
 
@@ -36,8 +36,7 @@ export const CreateProject = () => {
     initialValues: {
       title: "",
       desc: "",
-      live_link: "",
-      github_link: "",
+      link: "",
       tags: [],
     },
     validationSchema: createProjectSchema,
@@ -48,8 +47,6 @@ export const CreateProject = () => {
       }
       values = trimAll(values);
       let temp = { ...values };
-      if (temp.live_link === "") delete temp["live_link"];
-      if (temp.github_link === "") delete temp["github_link"];
       if (temp?.tags?.length === 0) delete temp["tags"];
       if (temp?.desc?.length === 0) delete temp["desc"];
       temp.image = image;
@@ -96,7 +93,7 @@ export const CreateProject = () => {
   return (
     <>
       <Head>
-        Post Your Awesome Project, <span>{myData?.username}</span>
+        Post a Scholarship, <span>{myData?.username}</span>
       </Head>
       <MainWrapper>
         <MainLeft>
@@ -133,40 +130,18 @@ export const CreateProject = () => {
                 readOnly={isLoading}
               />
               <TextField
-                name="github_link"
-                label="Github Link"
+                name="link"
+                label="Link"
                 variant="outlined"
                 color="secondary"
                 className="form-input"
                 fullWidth
-                value={values.github_link}
+                value={values.link}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={touched.github_link && errors.github_link ? true : false}
+                error={touched.link && errors.link ? true : false}
                 readOnly={isLoading}
-                helperText={
-                  touched.github_link && errors.github_link
-                    ? errors.github_link
-                    : null
-                }
-              />
-              <TextField
-                name="live_link"
-                label="Live Link"
-                variant="outlined"
-                color="secondary"
-                className="form-input"
-                fullWidth
-                value={values.live_link}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.live_link && errors.live_link ? true : false}
-                readOnly={isLoading}
-                helperText={
-                  touched.live_link && errors.live_link
-                    ? errors.live_link
-                    : null
-                }
+                helperText={touched.link && errors.link ? errors.link : null}
               />
               <Autocomplete
                 multiple
@@ -191,7 +166,7 @@ export const CreateProject = () => {
                 type="submit"
                 disabled={isLoading}
               >
-                {isLoading ? <ButtonLoader /> : "Add Project"}
+                {isLoading ? <ButtonLoader /> : "Add Scholarship"}
               </button>
             </div>
           </MainForm>
@@ -204,7 +179,7 @@ export const CreateProject = () => {
               <div className="image-wrapper">
                 <BsCardImage />
                 <div className="text">
-                  Cover Image for your project {"(Max 3MB)"}
+                  Cover Image for the scholarship {"(Max 3MB)"}
                 </div>
               </div>
             )}

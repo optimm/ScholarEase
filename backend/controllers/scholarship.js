@@ -11,7 +11,7 @@ const User = require("../models/User");
 const { default: mongoose } = require("mongoose");
 
 const getAllScholarship = async (req, res) => {
-  let searchQuery = {};
+  let searchQuery = { owner: { $ne: req.user.userId } };
   const data = await searchProject(req, res, searchQuery);
   res.status(StatusCodes.OK).json({ success: true, data });
 };

@@ -16,34 +16,7 @@ let createProjectSchema = yup.object().shape({
     }),
 
   desc: yup.string().max(500, "Description cannot be more than 500 characters"),
-  github_link: yup
-    .string()
-    .test(
-      "github_link",
-      "Either github link or live link is required",
-      function (val) {
-        if (
-          (!val || val?.trim() === "") &&
-          (!this.parent?.live_link || this.parent?.live_link?.trim() === "")
-        )
-          return false;
-        return true;
-      }
-    ),
-  live_link: yup
-    .string()
-    .test(
-      "live_link",
-      "Either github link or live link is required",
-      function (val) {
-        if (
-          (!val || val?.trim() === "") &&
-          (!this.parent?.github_link || this.parent?.github_link?.trim() === "")
-        )
-          return false;
-        return true;
-      }
-    ),
+  link: yup.string(),
   tags: yup.array(yup.string().required("Tag is required")),
 });
 

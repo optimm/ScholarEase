@@ -78,25 +78,7 @@ export const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["SingleUser"],
     }),
-    //followers following
-    followUser: builder.mutation({
-      query: ({ id }) => {
-        return {
-          url: `user/${id}/follow`,
-          method: "GET",
-        };
-      },
-      invalidatesTags: ["SingleUser", "Followers"],
-    }),
-    getFollowersFollowing: builder.query({
-      query: ({ id, category }) => {
-        return {
-          url: `user/${id}/${category}`,
-          method: "GET",
-        };
-      },
-      providesTags: ["Followers"],
-    }),
+
     getProjectOfUser: builder.query({
       query: ({ id }) => {
         return {
@@ -116,15 +98,6 @@ export const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["SavedProjects"],
     }),
-    getFeed: builder.query({
-      query: () => {
-        return {
-          url: `user/me/feed`,
-          method: "GET",
-        };
-      },
-      providesTags: ["Feed"],
-    }),
   }),
 });
 
@@ -133,10 +106,7 @@ export const {
   useEditProfileMutation,
   useGetAllUserQuery,
   useGetSingleUserQuery,
-  useFollowUserMutation,
-  useGetFollowersFollowingQuery,
   useDeleteProfileMutation,
   useGetProjectOfUserQuery,
   useGetSavedProjectsQuery,
-  useGetFeedQuery,
 } = userApi;

@@ -5,7 +5,7 @@ export const projectApi = baseApi.injectEndpoints({
     getAllProjects: builder.query({
       query: ({ q }) => {
         return {
-          url: q?.length > 0 ? `project?q=${q}` : "project",
+          url: q?.length > 0 ? `scholarship?q=${q}` : "scholarship",
           method: "GET",
         };
       },
@@ -14,7 +14,7 @@ export const projectApi = baseApi.injectEndpoints({
     getSingleProject: builder.query({
       query: ({ id }) => {
         return {
-          url: `project/${id}`,
+          url: `scholarship/${id}`,
           method: "GET",
         };
       },
@@ -23,7 +23,7 @@ export const projectApi = baseApi.injectEndpoints({
     createProject: builder.mutation({
       query: ({ body }) => {
         return {
-          url: "project/create",
+          url: "scholarship/create",
           method: "POST",
           body,
         };
@@ -33,7 +33,7 @@ export const projectApi = baseApi.injectEndpoints({
     editProject: builder.mutation({
       query: ({ body, id }) => {
         return {
-          url: `project/${id}`,
+          url: `scholarship/${id}`,
           method: "PATCH",
           body,
         };
@@ -44,7 +44,7 @@ export const projectApi = baseApi.injectEndpoints({
     deleteProject: builder.mutation({
       query: ({ id }) => {
         return {
-          url: `project/${id}`,
+          url: `scholarship/${id}`,
           method: "DELETE",
         };
       },
@@ -58,7 +58,7 @@ export const projectApi = baseApi.injectEndpoints({
     likeUnlikeProject: builder.mutation({
       query: ({ id }) => {
         return {
-          url: `project/${id}/like`,
+          url: `scholarship/${id}/upvote`,
           method: "GET",
         };
       },
@@ -72,7 +72,7 @@ export const projectApi = baseApi.injectEndpoints({
     saveUnsaveProject: builder.mutation({
       query: ({ id }) => {
         return {
-          url: `project/${id}/save`,
+          url: `scholarship/${id}/save`,
           method: "GET",
         };
       },
@@ -86,7 +86,7 @@ export const projectApi = baseApi.injectEndpoints({
     getComments: builder.query({
       query: ({ id }) => {
         return {
-          url: `project/${id}/comment`,
+          url: `scholarship/${id}/comment`,
           method: "GET",
         };
       },
@@ -95,7 +95,7 @@ export const projectApi = baseApi.injectEndpoints({
     addComment: builder.mutation({
       query: ({ id, body }) => {
         return {
-          url: `project/${id}/comment`,
+          url: `scholarship/${id}/comment`,
           method: "POST",
           body,
         };
@@ -111,7 +111,7 @@ export const projectApi = baseApi.injectEndpoints({
     deleteComment: builder.mutation({
       query: ({ id, body }) => {
         return {
-          url: `project/${id}/comment`,
+          url: `scholarship/${id}/comment`,
           method: "DELETE",
           body,
         };
@@ -127,7 +127,7 @@ export const projectApi = baseApi.injectEndpoints({
     editComment: builder.mutation({
       query: ({ id, body }) => {
         return {
-          url: `project/${id}/comment`,
+          url: `scholarship/${id}/comment`,
           method: "PATCH",
           body,
         };

@@ -10,7 +10,7 @@ import { BiComment, BiShareAlt } from "react-icons/bi";
 import { AiFillLike, AiOutlineDelete } from "react-icons/ai";
 import { RiBookmarkFill, RiEditFill } from "react-icons/ri";
 
-import { ExtraButton, ProfileIndv } from "../styles/pages/profileStyles";
+import { ProfileIndv } from "../styles/pages/profileStyles";
 import ProfileIcon from "../components/ProfileIcon";
 import {
   useGetSingleProjectQuery,
@@ -24,7 +24,6 @@ import AllTagsModal from "../components/AllTagsModal";
 import LikesSavesModal from "../components/LikesSavesModal";
 import CommentsModal from "../components/CommentsModal";
 import DeleteAccountProject from "../components/DeleteAccountProject";
-import ReadmeFile from "../components/ReadmeFile";
 import { ErrorPage, ProfileLoader } from "../components/Loaders";
 import { RotatingLines } from "react-loader-spinner";
 
@@ -48,7 +47,6 @@ const Project = () => {
   const [savesShow, setSavesShow] = useState(false);
   const [comment, setComment] = useState(false);
   const [deleteProject, setDeleteProject] = useState(false);
-  const [readmeShow, setReadmeShow] = useState(false);
 
   const [blankLoader, setBlankLoader] = useState(true);
   const [errorPage, setErrorPage] = useState(false);
@@ -174,33 +172,16 @@ const Project = () => {
                   </div>
                 </div>
                 <div className="links-section">
-                  {projectData?.github_link && (
+                  {projectData?.link && (
                     <ProfileIndv
                       onClick={() =>
-                        window.open(linkProcessor(projectData?.github_link))
-                      }
-                    >
-                      <ProfileIcon platform={"github"} />
-                    </ProfileIndv>
-                  )}
-                  {projectData?.live_link && (
-                    <ProfileIndv
-                      onClick={() =>
-                        window.open(linkProcessor(projectData?.live_link))
+                        window.open(linkProcessor(projectData?.link))
                       }
                     >
                       <ProfileIcon platform={"website"} />
                     </ProfileIndv>
                   )}
                 </div>
-                {data?.readme?.readmeData && (
-                  <div
-                    className="links-section"
-                    onClick={() => setReadmeShow(true)}
-                  >
-                    <ExtraButton>View Readme</ExtraButton>
-                  </div>
-                )}
               </div>
             </div>
             <div className="main-right">
@@ -233,7 +214,7 @@ const Project = () => {
                   ) : (
                     <LikesIndv
                       onClick={handleLikeUnlike}
-                      checked={data?.isLiked}
+                      checked={data?.isUpvoted}
                     >
                       <AiFillLike />
                     </LikesIndv>
@@ -283,7 +264,7 @@ const Project = () => {
 
               <div className="likes-section">
                 <div className="likes-data" onClick={() => setLikesShow(true)}>
-                  Liked by {projectData?.total_upvotes}{" "}
+                  Upvoted by {projectData?.total_upvotes}{" "}
                   {projectData?.total_upvotes === 1 ? "User" : "Users"}
                 </div>
                 {isAuthenticated && data?.isMine && (
@@ -309,7 +290,7 @@ const Project = () => {
             <LikesSavesModal
               show={likesShow}
               setShow={setLikesShow}
-              array={projectData?.likes}
+              array={projectData?.upvotes}
               heading="Likes"
             />
           )}
@@ -333,13 +314,6 @@ const Project = () => {
               show={deleteProject}
               setShow={setDeleteProject}
               project={true}
-            />
-          )}
-          {readmeShow && (
-            <ReadmeFile
-              show={readmeShow}
-              setShow={setReadmeShow}
-              readmeData={data?.readme}
             />
           )}
         </>
