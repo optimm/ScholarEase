@@ -8,6 +8,7 @@ async function scrape(link) {
   try {
     const url = link;
     const pageHTML = await axios.get(url);
+
     const $ = cheerio.load(pageHTML.data);
 
     $("a").each((index, element) => {

@@ -5,7 +5,7 @@ const main = async () => {
   // func 1
   // await getSaveGoogleLinks();
 
-  console.log("Saved the links");
+  // console.log("Saved the links");
   // func 2
   await getSaveRelevantData();
 

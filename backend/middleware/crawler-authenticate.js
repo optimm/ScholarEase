@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { UnauthenticatedError } = require("../errors");
 
 const crawlerAuthMiddleware = async (req, res, next) => {
-  const authorizationHeader = req.headers["Authorization"];
+  const authorizationHeader = req.headers["authorization"];
 
   if (!authorizationHeader) {
     throw new UnauthenticatedError("Not authorized");

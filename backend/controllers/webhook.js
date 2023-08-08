@@ -1,7 +1,7 @@
 const Scholarship = require("../models/Scholarship");
 const { StatusCodes } = require("http-status-codes");
 const User = require("../models/User");
-const { CustomAPIError } = require("../errors");
+const { CustomAPIError, BadRequestError } = require("../errors");
 
 const addScholarship = async (req, res) => {
   const { title, desc, link, tags } = req.body;
@@ -17,7 +17,7 @@ const addScholarship = async (req, res) => {
     //ad title with number
     title = `Scholarship ${total + 1}`;
   }
-  const scholarshipPresent = await Scholarship.find({ link });
+  const scholarshipPresent = await Scholarship.findOne({ link });
 
   if (scholarshipPresent) {
     throw new BadRequestError("Scholarship is present in db");
@@ -25,7 +25,7 @@ const addScholarship = async (req, res) => {
 
   let scholarshipData = { link, title };
 
-  if (desc && desc != "") scholarshipData.link = link;
+  if (desc && desc != "") scholarshipData.desc = desc;
   if (tags) scholarshipData.tags = tags;
 
   const scholarship = await Scholarship.create({

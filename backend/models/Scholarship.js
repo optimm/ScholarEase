@@ -13,7 +13,6 @@ const ScholarshipSchema = new mongoose.Schema({
   },
   desc: {
     type: String,
-    required: [true, "Please provide a description"],
     max: [500, "Descripition cannot be more than 500 characters"],
   },
   tags: [{ type: String }],

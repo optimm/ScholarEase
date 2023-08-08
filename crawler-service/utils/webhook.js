@@ -4,15 +4,15 @@ const { generateJwtToken } = require("./generateJwtToken");
 const addScholarShip = async ({ title = "", link, desc = "" }) => {
   console.log("reached webhook");
   try {
-    const authToken = generateJwtToken();
+    const authToken = await generateJwtToken();
     const headers = {
       Authorization: `Bearer ${authToken}`,
     };
 
     const scholarship = await axios.post(
       `${process.env.BACKEND_URL}/crawler/scholarship/add`,
+      { title, link, desc },
       {
-        body: { title, link, desc },
         headers,
       }
     );
