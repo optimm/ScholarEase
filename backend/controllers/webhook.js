@@ -4,7 +4,7 @@ const User = require("../models/User");
 const { CustomAPIError, BadRequestError } = require("../errors");
 
 const addScholarship = async (req, res) => {
-  const { title, desc, link, tags } = req.body;
+  let { title, desc, link, tags } = req.body;
   const admin = await User.findOne({ email: process.env.ADMIN_EMAIL });
   if (!admin) {
     throw new CustomAPIError("No Admin");
