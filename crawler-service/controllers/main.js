@@ -6,7 +6,7 @@ const main = async () => {
   await getSaveGoogleLinks();
 
   // func 2
-  await getRelevantData();
+  // await getRelevantData();
 
   //make request
 };

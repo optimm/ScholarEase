@@ -24,10 +24,14 @@ async function searchGoogle(keyword, depth, filePath) {
         const linkElement = element.querySelector("a");
 
         if (titleElement && linkElement) {
-          searchResults.push({
-            title: titleElement.innerText,
-            link: linkElement.href,
-          });
+          const link = linkElement.href;
+
+          if (link.includes(".gov.in")) {
+            searchResults.push({
+              title: titleElement.innerText,
+              link: link,
+            });
+          }
         }
       });
 
@@ -48,7 +52,6 @@ async function searchGoogle(keyword, depth, filePath) {
 
   // Close the browser
   await browser.close();
-
 
   // Return the search results
   return results;

@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const getSaveGoogleLinks = async () => {
   // 1 get the links from the crawler
-  const links = await searchGoogle("scholarship", 1, false);
+  const links = await searchGoogle("government scholarship", 5, false);
 
   // store in db
   links.forEach(async (link) => {
@@ -14,10 +14,10 @@ const getSaveGoogleLinks = async () => {
         title: link.title,
         link: link.link,
       });
-      if(ispresent) continue;
+      if (!ispresent) {
+        await Links.create({ title: link.title, link: link.link });
+      }
     } catch (error) {}
-    await Links.create({ title: link.title, link: link.link });
-    // console.log({ saved });
   });
 };
 
