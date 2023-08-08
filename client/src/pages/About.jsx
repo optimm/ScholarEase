@@ -1,20 +1,24 @@
 import React from "react";
-import "../styles/pages/aboutPageStyles.css";
+import { AboutContainer } from "../styles/pages/aboutPageStyles";
 
 const About = () => {
   return (
-    <div className="about-container">
+    <AboutContainer>
       <header className="header">
-        <h1>About Us - Scholarship Portal</h1>
+        <h1>About ScholarEase</h1>
         <div className="image-container">
-          <img src="/images/about.jpg" className="about-image" />
+          <img
+            src="/images/about.jpg"
+            className="about-image"
+            alt="scholarship"
+          />
         </div>
       </header>
       <section className="mission">
         <h2>Our Mission</h2>
         <p>
-          At the Scholarship Portal, our mission is to empower students by
-          bridging the gap between education and affordability...
+          At the ScholarEase, our mission is to empower students by bridging the
+          gap between education and affordability...
         </p>
       </section>
       <section className="sets-apart">
@@ -39,13 +43,10 @@ const About = () => {
         <p>
           We value your feedback and questions. If you have any inquiries or
           suggestions, please don't hesitate to reach out to our support team at{" "}
-          <a href="mailto:support@scholarshipportal.com">
-            support@scholarshipportal.com
-          </a>
-          .
+          <a href="mailto:scholarease0@gmail.com">scholarease0@gmail.com</a>.
         </p>
       </section>
-    </div>
+    </AboutContainer>
   );
 };
 
