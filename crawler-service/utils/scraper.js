@@ -2,7 +2,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 async function scrape(link) {
-  // console.log("scraping:", link);
+  console.log("scraping:", link);
   const scholarshipsLinks = new Set();
 
   try {
@@ -13,18 +13,16 @@ async function scrape(link) {
     $("a").each((index, element) => {
       const link = $(element).attr("href");
       var linkText = $(element).text();
-      // console.log(link);
-      // console.log(linkText);
+
       linkText = linkText.toLowerCase();
 
       if (linkText.includes("scholarship") || linkText.includes("fellowship")) {
         const linkObj = { title: linkText, link: link };
         scholarshipsLinks.add(linkObj);
-        // console.log(link);
       }
     });
   } catch (e) {
-    console.log("error: ", e);
+    console.log("Scrape error: ", e);
   }
   return [...scholarshipsLinks];
 }

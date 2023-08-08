@@ -13,7 +13,7 @@ const addScholarship = async (req, res) => {
     throw new BadRequestError("Link not present in scholarship");
   }
   const total = await Scholarship.count({});
-  if (!title) {
+  if (!title || title === "") {
     //ad title with number
     title = `Scholarship ${total + 1}`;
   }
@@ -25,7 +25,7 @@ const addScholarship = async (req, res) => {
 
   let scholarshipData = { link, title };
 
-  if (desc) scholarshipData.link = link;
+  if (desc && desc != "") scholarshipData.link = link;
   if (tags) scholarshipData.tags = tags;
 
   const scholarship = await Scholarship.create({
