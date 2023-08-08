@@ -19,6 +19,7 @@ const ScholarshipSchema = new mongoose.Schema({
   tags: [{ type: String }],
 
   link: {
+    required: [true, "Please provide a link"],
     type: String,
   },
 

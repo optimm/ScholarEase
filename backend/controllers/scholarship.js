@@ -67,28 +67,30 @@ const createScholarship = async (req, res) => {
   const { userId } = req.user;
   const me = await User.findById(userId);
   const { title, desc, link, image, tags } = req.body;
-  if (!title) {
-    throw new BadRequestError("Please Provide title for scholarship");
+  if (!title || !link) {
+    throw new BadRequestError(
+      "Please Provide a title and link for scholarship"
+    );
   }
 
-  let projectData = {
+  let scholarshipData = {
     title,
+    link,
   };
-  if (desc) projectData.desc = desc;
-  if (tags) projectData.tags = tags;
-  if (link) projectData.link = link;
+  if (desc) scholarshipData.desc = desc;
+  if (tags) scholarshipData.tags = tags;
   if (image) {
     const myCloud = await cloudinary.uploader.upload(image, {
       folder: "scholarships",
     });
-    projectData.image = {
+    scholarshipData.image = {
       public_id: myCloud?.public_id,
       url: myCloud?.secure_url,
     };
   }
 
   const scholarship = await Scholarship.create({
-    ...projectData,
+    ...scholarshipData,
     owner: userId,
   });
   me.scholarships.unshift(scholarship._id);

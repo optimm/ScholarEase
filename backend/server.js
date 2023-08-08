@@ -30,6 +30,7 @@ const connectDb = require("./db/connect");
 const authRouter = require("./routes/auth");
 const projectRouter = require("./routes/scholarship");
 const userRouter = require("./routes/user");
+const webhookRouter = require("./routes/webhook");
 
 // error handler middlewares
 const notFoundMiddleware = require("./middleware/not-found");
@@ -41,7 +42,7 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 app.use(
   cors({
     credentials: true,
-    origin: `${process.env.FRONTEND_URL}`,
+    origin: [`${process.env.FRONTEND_URL}`, `${process.env.CRAWLER_URL}`],
     sameSite: "none",
   })
 );
@@ -56,9 +57,11 @@ app.use(morgan("dev"));
 app.get("/", (req, res) => {
   res.send("Hello");
 });
+
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/scholarship", projectRouter);
+app.use("/api/v1/crawler", webhookRouter);
 
 // error handler
 app.use(notFoundMiddleware);
