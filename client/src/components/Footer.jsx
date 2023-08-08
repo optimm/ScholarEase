@@ -21,7 +21,7 @@ const Footer = () => {
         </a>
       </div>
       <div className="text-section">
-        © 2023 ScholarEase. Created by Ayush Saxena
+        © 2023 ScholarEase. Created by Team ScholarEase
       </div>
     </FooterWrapper>
   );
