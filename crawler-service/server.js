@@ -32,8 +32,9 @@ const start = async () => {
     });
 
     // Schedule mainController to run at 8:00 AM and 6:00 PM every day
-    mainController();
-    cron.schedule("0 8,18 * * *", () => {});
+    cron.schedule("0 8,18 * * *", () => {
+      mainController();
+    });
   } catch (error) {
     console.log(error);
   }

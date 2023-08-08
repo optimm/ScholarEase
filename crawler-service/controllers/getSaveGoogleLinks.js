@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const getSaveGoogleLinks = async () => {
-  const links = await searchGoogle("government scholarship", 1, false);
+  const links = await searchGoogle("government scholarship", 10, false);
 
   links.forEach(async (link) => {
     try {
