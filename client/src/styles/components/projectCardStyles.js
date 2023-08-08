@@ -18,13 +18,10 @@ export const ProjectCardWrapper = styled.div`
       props.loading &&
       "opacity: 0.7; animation: skeleton-loading 1s linear infinite alternate;"}
   }
+
   .image-overlay {
-    display: none;
-    animation: fadeIn 0.5s ease;
-  }
-  &:hover .image-overlay {
     ${flexch}
-    background: var(--back-drop);
+    background: var(--back-drop-card);
     position: absolute;
     color: white;
     height: 100%;
@@ -39,8 +36,8 @@ export const ProjectCardWrapper = styled.div`
     text-align: center;
     width: 85%;
     line-height: 1.2;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 600;
   }
   .likes-comments {
     display: flex;

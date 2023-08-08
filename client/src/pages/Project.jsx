@@ -186,13 +186,13 @@ const Project = () => {
             </div>
             <div className="main-right">
               <ProjectImageWrapper
-                url={projectData?.image?.url || "/images/login.jpg"}
+                url={projectData?.image?.url || "/images/scholarship.jpg"}
                 loading={loading}
               >
                 <div className="project-back"></div>
                 <div className="project-image"></div>
                 <img
-                  src={projectData?.image?.url || "/images/login.jpg"}
+                  src={projectData?.image?.url || "/images/scholarship.jpg"}
                   onLoad={handleImageLoad}
                   style={{ display: "none" }}
                   alt={"skeleton"}

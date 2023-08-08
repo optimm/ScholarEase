@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProjectCardWrapper } from "../styles/components/projectCardStyles";
 import { BiComment } from "react-icons/bi";
 import { AiFillLike } from "react-icons/ai";
@@ -7,21 +7,25 @@ import { Link, useNavigate } from "react-router-dom";
 const ProjectCard = ({ project }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [image, setImage] = useState("/images/scholarship.jpg");
+
+  useEffect(() => {
+    if (project?.image?.url) {
+      setImage(project?.image?.url);
+    }
+  }, [project?.image?.url]);
 
   function handleImageLoad() {
     setLoading(false);
   }
   return (
-    <ProjectCardWrapper
-      image={project?.image?.url || "/images/login.jpg"}
-      loading={loading}
-    >
+    <ProjectCardWrapper image={image} loading={loading}>
       <div
         className="image-section"
         onClick={() => navigate(`/scholarships/${project?._id}`)}
       >
         <img
-          src={project?.image?.url}
+          src={image}
           onLoad={handleImageLoad}
           style={{ display: "none" }}
           alt={"skeleton"}
