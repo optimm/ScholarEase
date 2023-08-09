@@ -34,16 +34,15 @@ const start = async () => {
     // Schedule mainController to run at 8:00 AM and 6:00 PM every day
 
     cron.schedule(
-      "45 0 * * *",
+      "10 1 * * *",
       () => {
-        console.log("Hello at 12:45 AM");
-        // mainController();
+        console.log("Hello at 1:10 AM");
+        mainController();
       },
       {
         timeZone: "Asia/Kolkata", // India Standard Time (IST)
       }
     );
-    
   } catch (error) {
     console.log(error);
   }
