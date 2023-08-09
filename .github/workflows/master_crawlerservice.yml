@@ -7,13 +7,15 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "crawler-service/**"
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: 'Production'
+      name: "Production"
 
     steps:
       - uses: actions/checkout@v2
@@ -21,17 +23,17 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
+          node-version: "16.x"
 
       - name: Install dependencies
         run: npm install
         working-directory: ./crawler-service
 
-      - name: 'Deploy to Azure Web App'
+      - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'crawlerservice'
-          slot-name: 'Production'
+          app-name: "crawlerservice"
+          slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AA21552CC94E435991281D0B77DBFA98 }}
           package: ./crawler-service

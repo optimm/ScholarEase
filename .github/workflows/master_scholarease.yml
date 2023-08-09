@@ -6,13 +6,15 @@ name: Deploy Node.js app to Azure Web App - Scholarease
 on:
   push:
     branches:
-      - master  # Trigger only on the "master" branch
+      - master # Trigger only on the "master" branch
+    paths:
+      - "backend/**"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: 'Production'
+      name: "Production"
 
     steps:
       - uses: actions/checkout@v2
@@ -20,17 +22,17 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
+          node-version: "16.x"
 
       - name: Install dependencies
         run: npm install
         working-directory: ./backend
 
-      - name: 'Deploy to Azure Web App'
+      - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Scholarease'
-          slot-name: 'Production'
+          app-name: "Scholarease"
+          slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F4F383842EEF418B9844C1785B6F62D8 }}
           package: ./backend
