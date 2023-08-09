@@ -16,7 +16,7 @@ const addScholarShip = async ({ title = "", link, desc = "" }) => {
       }
     );
   } catch (error) {
-    console.log("Make request to backend error: ", error);
+    console.log("Make request to backend error: ", error?.response?.data);
   }
 };
 

@@ -24,7 +24,7 @@ const getSaveRelevantData = async () => {
         try {
           await addScholarShip(obj);
         } catch (error) {
-          console.log("Add scholarship to backend error: ", err);
+          console.log("Add scholarship to backend error: ", error);
           continue;
         }
       }
