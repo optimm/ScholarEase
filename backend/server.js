@@ -55,7 +55,7 @@ app.use(morgan("dev"));
 
 //routes
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.send("Hello backend is running fine");
 });
 
 app.use("/api/v1/auth", authRouter);
