@@ -33,7 +33,7 @@ const start = async () => {
 
     // Schedule mainController to run at 8:00 AM and 6:00 PM every day
 
-    cron.schedule("0 8,17 15 * *", () => {
+    cron.schedule("0 8,17 30 * *", () => {
       mainController();
     });
   } catch (error) {
