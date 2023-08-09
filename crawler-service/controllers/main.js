@@ -3,7 +3,7 @@ const getSaveRelevantData = require("./getSaveRelevantData");
 
 const main = async () => {
   await getSaveGoogleLinks();
-  await getSaveRelevantData();
+  // await getSaveRelevantData();
 };
 
 module.exports = main;
