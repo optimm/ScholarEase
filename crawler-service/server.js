@@ -33,8 +33,13 @@ const start = async () => {
 
     // Schedule mainController to run at 8:00 AM and 6:00 PM every day
 
-    cron.schedule("*/5 * * * *", () => {
-      mainController();
+    cron.schedule("*/5 * * * *", async () => {
+      // mainController();
+      await addScholarShip({
+        title: "hello",
+        link: "google.com",
+        desc: "hehe",
+      });
     });
   } catch (error) {
     console.log(error);
