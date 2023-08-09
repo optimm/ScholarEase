@@ -25,7 +25,7 @@ app.get("/", async (req, res) => {
 
 const start = async () => {
   try {
-    await connectDB();
+    // await connectDB();
     console.log("Connected to Db");
     app.listen(port, () => {
       console.log(`Server is running on port ${port} `);
@@ -33,9 +33,17 @@ const start = async () => {
 
     // Schedule mainController to run at 8:00 AM and 6:00 PM every day
 
-    cron.schedule("0 8,17 30 * *", () => {
-      mainController();
-    });
+    cron.schedule(
+      "45 0 * * *",
+      () => {
+        console.log("Hello at 12:45 AM");
+        // mainController();
+      },
+      {
+        timeZone: "Asia/Kolkata", // India Standard Time (IST)
+      }
+    );
+    
   } catch (error) {
     console.log(error);
   }
