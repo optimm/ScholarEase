@@ -6,10 +6,10 @@ const SendMail = async ({ email, token }) => {
   const link = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
   const msg = {
     to: email,
-    from: "devhubbbb@gmail.com",
+    from: "scholarease0@gmail.com",
     subject: "Reset Your Password",
     html: `<div>
-    <p>This Email is regarding reseting your password. The link can only be used once and will be valid for 10 minutes only</p>
+    <p>Hello This Email from Scholarease is regarding resetting your password. The link can only be used once and will be valid for 10 minutes only</p>
    <p>${link}</p>
     </div>`,
   };

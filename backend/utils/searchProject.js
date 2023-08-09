@@ -90,7 +90,7 @@ const searchProject = async (req, res, searchQuery) => {
     total = z[0]?.count || 0;
   } else {
     mongoQuery = Scholarship.find(searchQuery)
-      .sort("-total_upvotes")
+      .sort("-created_at")
       .select("-upvotes -comments -saved")
       .populate("owner", "name email avatar username");
     total = await Scholarship.countDocuments(searchQuery);
