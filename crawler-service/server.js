@@ -31,16 +31,9 @@ const start = async () => {
       console.log(`Server is running on port ${port} `);
     });
 
-    // Schedule mainController to run at 8:00 AM and 6:00 PM every day
-
+    mainController();
     cron.schedule("*/1 * * * * *", async () => {
-      console.log("hello");
-      mainController();
-      // await addScholarShip({
-      //   title: "hello",
-      //   link: "google.com",
-      //   desc: "hehe",
-      // });
+      //schedule cron
     });
   } catch (error) {
     console.log(error);
