@@ -25,16 +25,13 @@ app.get("/", async (req, res) => {
 
 const start = async () => {
   try {
-    // await connectDB();
+    await connectDB();
     console.log("Connected to Db");
     app.listen(port, () => {
       console.log(`Server is running on port ${port} `);
     });
 
-    mainController();
-    cron.schedule("*/1 * * * * *", async () => {
-      //schedule cron
-    });
+    await mainController();
   } catch (error) {
     console.log(error);
   }
